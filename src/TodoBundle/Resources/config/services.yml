@@ -1,0 +1,19 @@
+services:
+#    todo.example:
+#        class: TodoBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
+
+# Actions
+    action.search.todos:
+      class: TodoBundle\Application\Action\SearchTodo
+      arguments: ["@service.fetchall.todos"]
+
+# Services
+    service.fetchall.todos:
+      class: TodoBundle\Domain\Todo\Service\FetchAllTodos
+      arguments: ["@repository.todo"]
+
+# Repositories
+    repository.todo:
+      class: TodoBundle\Infrastructure\Repository\TodoRepository
+      arguments: ['@doctrine.orm.entity_manager']
