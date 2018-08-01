@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace TodoBundle\Domain\Todo\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use TodoBundle\Domain\Category\Entity\Category;
 
 /**
  * Class Todo
@@ -32,15 +33,15 @@ class Todo
      */
     private $description;
     /**
-     * @var int
+     * @var Category
      * @ORM\ManyToOne(targetEntity="TodoBundle\Domain\Category\Entity\Category", cascade={"all"}, fetch="LAZY")
-     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id", nullable=false)
      */
-    private $categoryId;
+    private $category;
     /**
      * @var int
      * @ORM\ManyToOne(targetEntity="TodoBundle\Domain\User\Entity\User", cascade={"all"}, fetch="LAZY")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=false)
      */
     private $userId;
     /**
@@ -58,7 +59,7 @@ class Todo
      * Todo constructor.
      * @param string $name
      * @param string $description
-     * @param int $categoryId
+     * @param int $category
      * @param int $userId
      * @param \DateTime $finishDate
      * @param \DateTime $createdDate
@@ -66,14 +67,14 @@ class Todo
     public function __construct(
         string $name,
         string $description,
-        int $categoryId,
+        int $category,
         int $userId,
         \DateTime $finishDate,
         \DateTime $createdDate
     ) {
         $this->name = $name;
         $this->description = $description;
-        $this->categoryId = $categoryId;
+        $this->category = $category;
         $this->userId = $userId;
         $this->finishDate = $finishDate;
         $this->createdDate = $createdDate;
@@ -104,11 +105,11 @@ class Todo
     }
 
     /**
-     * @return int
+     * @return Category
      */
-    public function getCategoryId(): int
+    public function getCategory(): Category
     {
-        return $this->categoryId;
+        return $this->category;
     }
 
     /**

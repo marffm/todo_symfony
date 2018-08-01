@@ -3,29 +3,34 @@ declare(strict_types=1);
 
 namespace TodoBundle\Infrastructure\Repository;
 
-use Doctrine\ORM\EntityManager;
+use Doctrine\Bundle\DoctrineBundle\Registry;
+use TodoBundle\Domain\Todo\Entity\Todo;
 use TodoBundle\Domain\Todo\RepositoryInterface\TodoRepositoryInterface;
 
 class TodoRepository implements TodoRepositoryInterface
 {
     /**
-     * @var EntityManager
+     * @var Registry
      */
     private $doctrine;
 
     /**
      * TodoRepository constructor.
-     * @param EntityManager $doctrine
+     * @param Registry $doctrine
      */
-    public function __construct(EntityManager $doctrine)
+    public function __construct(Registry $doctrine)
     {
-        $this->doctrine = $doctrine;
+        $this->doctrine = $doctrine->getRepository(Todo::class);
+
     }
 
 
-    public function fetchAllTodos()
+    /**
+     * @return array|null
+     */
+    public function fetchAllTodos(): ?array
     {
-        echo '<pre>' .var_dump($this->doctrine);die;
+        return $this->doctrine->findAll()?? null;
     }
 
 

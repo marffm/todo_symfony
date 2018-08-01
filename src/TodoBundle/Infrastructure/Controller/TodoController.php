@@ -6,6 +6,7 @@ namespace TodoBundle\Infrastructure\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
+use TodoBundle\Domain\Todo\Entity\Todo;
 
 class TodoController extends Controller
 {
@@ -15,9 +16,8 @@ class TodoController extends Controller
     public function getTodosAction(): JsonResponse
     {
         $searchTodo = $this->get('action.search.todos');
-
-        $searchTodo->fetchTodos();
-
+        $data = $searchTodo->fetchTodos();
+        echo '<pre>' .var_dump($data);die;
 
         return $this->json(['data' => 'action']);
     }

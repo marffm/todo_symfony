@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace TodoBundle\Domain\Todo\Service;
 
+use TodoBundle\Domain\Todo\Entity\Todo;
 use TodoBundle\Domain\Todo\RepositoryInterface\TodoRepositoryInterface;
 use TodoBundle\Infrastructure\Repository\TodoRepository;
 
@@ -22,8 +23,12 @@ class FetchAllTodos
         $this->todoRepository = $todoRepository;
     }
 
-    public function fetchAllTodos()
+    /**
+     * @return Todo[]|null
+     */
+    public function fetchAllTodos(): ?array
     {
-        $this->todoRepository->fetchAllTodos();
+        // Here we can create whatever domain rule we need
+        return $this->todoRepository->fetchAllTodos();
     }
 }

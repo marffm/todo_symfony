@@ -16,4 +16,4 @@ services:
 # Repositories
     repository.todo:
       class: TodoBundle\Infrastructure\Repository\TodoRepository
-      arguments: ['@doctrine.orm.entity_manager']
+      arguments: ['@doctrine']

@@ -18,9 +18,10 @@ class SearchTodo
     }
 
 
-    public function fetchTodos()
+    public function fetchTodos(): ?array
     {
-        $this->fetchAllTodos->fetchAllTodos();
+        // Here we create our DTO to passa data into a service
+        return $this->fetchAllTodos->fetchAllTodos();
     }
 
 
