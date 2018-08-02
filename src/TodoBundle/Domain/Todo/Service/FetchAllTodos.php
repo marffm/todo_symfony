@@ -29,6 +29,10 @@ class FetchAllTodos
     public function fetchAllTodos(): ?array
     {
         // Here we can create whatever domain rule we need
-        return $this->todoRepository->fetchAllTodos();
+        $todos = $this->todoRepository->fetchAllTodos();
+        if (null === $todos) {
+            throw new \RuntimeException('Error to list Todos, it may not exists.');
+        }
+        return $todos;
     }
 }

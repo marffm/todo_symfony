@@ -24,7 +24,6 @@ class TodoRepository implements TodoRepositoryInterface
 
     }
 
-
     /**
      * @return array|null
      */
