@@ -34,7 +34,10 @@ class TodoController extends FOSRestController
      */
     public function getTodoAction(string $id): View
     {
-        return $this->json(['data' => 'id passed ' . $id]);
+        return $this->view(
+            ReturnFormatter::successReturn(['data' => 'id passed ' . $id]),
+            Response::HTTP_OK
+        );
     }
 
 }
