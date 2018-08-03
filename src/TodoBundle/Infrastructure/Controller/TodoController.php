@@ -7,7 +7,6 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\View\View;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use TodoBundle\Infrastructure\Helper\ReturnFormatter;
 
 class TodoController extends FOSRestController
@@ -27,7 +26,7 @@ class TodoController extends FOSRestController
     }
 
     /**
-     * @Route("todo/{id}", name="Todo", methods={"GET"})
+     * @Rest\Get("todo/{id}")
      *
      * @param string $id
      * @return View

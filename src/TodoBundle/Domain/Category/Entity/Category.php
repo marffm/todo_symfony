@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace TodoBundle\Domain\Category\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use TodoBundle\Domain\Category\DTOInterface\InsertCategoryDTOInterface;
 
 /**
  * Class Category
@@ -67,6 +68,17 @@ class Category
         return $this->description;
     }
 
+    /**
+     * @param InsertCategoryDTOInterface $insertCategoryDTO
+     * @return Category
+     */
+    public static function fromInsertCategoryDTO(InsertCategoryDTOInterface $insertCategoryDTO): self
+    {
+        return new self(
+            $insertCategoryDTO->getName(),
+            $insertCategoryDTO->getDescription()
+        );
+    }
 
 
 }
