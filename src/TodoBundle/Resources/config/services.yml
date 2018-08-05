@@ -9,6 +9,10 @@ services:
       class: TodoBundle\Application\Action\InsertCategory
       arguments: ['@service.insertnewcategory.category']
 
+    action.update.category:
+      class: TodoBundle\Application\Action\UpdateCategory
+      arguments: ['@service.update.category']
+
 # Services
     service.fetchall.todos:
       class: TodoBundle\Domain\Todo\Service\FetchAllTodos
@@ -16,6 +20,10 @@ services:
 
     service.insertnewcategory.category:
       class: TodoBundle\Domain\Category\Service\InsertNewCategory
+      arguments: ['@repository.category']
+
+    service.update.category:
+      class: TodoBundle\Domain\Category\Service\UpdateCategory
       arguments: ['@repository.category']
 
 

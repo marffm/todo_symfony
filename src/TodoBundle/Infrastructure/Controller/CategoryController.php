@@ -46,4 +46,23 @@ class CategoryController extends FOSRestController
         );
     }
 
+    /**
+     * @Rest\Put("updateCategory/{categoryId}")
+     * @param Request $request
+     * @return View
+     */
+    public function putUpdateCategoryAction(Request $request): View
+    {
+        $idCategory = $request->get('categoryId');
+        $data = $request->request->get('data');
+
+        $updateCategory = $this->get('action.update.category');
+        $response = $updateCategory->updateCategoryAction($idCategory, $data);
+
+        return $this->view(
+            ReturnFormatter::successReturn($response, 'Category Updated', Response::HTTP_OK),
+            Response::HTTP_OK
+        );
+    }
+
 }

@@ -5,6 +5,7 @@ namespace TodoBundle\Domain\Category\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use TodoBundle\Domain\Category\DTOInterface\InsertCategoryDTOInterface;
+use TodoBundle\Domain\Category\DTOInterface\UpdateCategoryDTOInterface;
 
 /**
  * Class Category
@@ -66,6 +67,19 @@ class Category
     public function getDescription(): string
     {
         return $this->description;
+    }
+
+    /**
+     * @param UpdateCategoryDTOInterface $updateCategoryDTO
+     */
+    public function updateCategoryFromUpdateCategoryDTO(UpdateCategoryDTOInterface $updateCategoryDTO): void
+    {
+        if (($name = $updateCategoryDTO->getName()) !== null) {
+            $this->name = $name;
+        }
+        if (($description = $updateCategoryDTO->getDescription()) !== null) {
+            $this->description = $description;
+        }
     }
 
     /**

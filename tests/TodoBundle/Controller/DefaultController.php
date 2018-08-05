@@ -4,7 +4,7 @@ namespace TodoBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class DefaultControllerTest extends WebTestCase
+class DefaultController extends WebTestCase
 {
     public function testIndex()
     {

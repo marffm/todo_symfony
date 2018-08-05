@@ -38,6 +38,8 @@
         "twig/twig": "^1.0||^2.0"
     },
     "require-dev": {
+        "phpstan/phpstan": "^0.10.2",
+        "phpunit/phpunit": "^7",
         "sensio/generator-bundle": "^3.0",
         "symfony/phpunit-bridge": "^3.0"
     },
@@ -55,7 +57,9 @@
         ],
         "post-update-cmd": [
             "@symfony-scripts"
-        ]
+        ],
+        "test" : "phpunit --colors=always",
+        "analyze": "phpstan analyse ./src --level max"
     },
     "config": {
         "sort-packages": true
