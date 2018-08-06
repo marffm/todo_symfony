@@ -44,6 +44,15 @@ class CategoryRepository implements CategoryRepositoryInterface
     }
 
     /**
+     * @param Category $category
+     */
+    public function deleteCategory(Category $category): void
+    {
+        $this->doctrine->remove($category);
+        $this->doctrine->flush();
+    }
+
+    /**
      * @param int $id
      * @return null|Category
      */

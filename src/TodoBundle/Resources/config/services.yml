@@ -13,6 +13,10 @@ services:
       class: TodoBundle\Application\Action\UpdateCategory
       arguments: ['@service.update.category']
 
+    action.delete.category:
+      class: TodoBundle\Application\Action\DeleteCategory
+      arguments: ['@service.delete.category']
+
 # Services
     service.fetchall.todos:
       class: TodoBundle\Domain\Todo\Service\FetchAllTodos
@@ -25,6 +29,10 @@ services:
     service.update.category:
       class: TodoBundle\Domain\Category\Service\UpdateCategory
       arguments: ['@repository.category']
+
+    service.delete.category:
+      class: TodoBundle\Domain\Category\Service\DeleteCategory
+      arguments: ['@repository.category','@repository.todo']
 
 
 # Repositories

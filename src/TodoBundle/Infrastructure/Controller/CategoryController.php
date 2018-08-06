@@ -47,7 +47,7 @@ class CategoryController extends FOSRestController
     }
 
     /**
-     * @Rest\Put("updateCategory/{categoryId}")
+     * @Rest\Put("/updateCategory/{categoryId}")
      * @param Request $request
      * @return View
      */
@@ -61,6 +61,23 @@ class CategoryController extends FOSRestController
 
         return $this->view(
             ReturnFormatter::successReturn($response, 'Category Updated', Response::HTTP_OK),
+            Response::HTTP_OK
+        );
+    }
+
+    /**
+     * @Rest\Delete("/deleteCategory/{categoryId}")
+     * @param Request $request
+     * @return View
+     */
+    public function deleteCategoryAction(Request $request): View
+    {
+        $idCategory = $request->get('categoryId');
+
+        $deleteCategory = $this->get('action.delete.category');
+        $response = $deleteCategory->deleteCategory($idCategory);
+        return $this->view(
+            ReturnFormatter::successReturn($response, 'Category Deleted', Response::HTTP_OK),
             Response::HTTP_OK
         );
     }

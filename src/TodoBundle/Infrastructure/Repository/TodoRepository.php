@@ -4,10 +4,11 @@ declare(strict_types=1);
 namespace TodoBundle\Infrastructure\Repository;
 
 use Doctrine\Bundle\DoctrineBundle\Registry;
+use TodoBundle\Domain\Category\RepositoryInterface\CategoryTodoRepositoryInterface;
 use TodoBundle\Domain\Todo\Entity\Todo;
 use TodoBundle\Domain\Todo\RepositoryInterface\TodoRepositoryInterface;
 
-class TodoRepository implements TodoRepositoryInterface
+class TodoRepository implements TodoRepositoryInterface, CategoryTodoRepositoryInterface
 {
     /**
      * @var Registry
@@ -20,7 +21,7 @@ class TodoRepository implements TodoRepositoryInterface
      */
     public function __construct(Registry $doctrine)
     {
-        $this->doctrine = $doctrine->getRepository(Todo::class);
+        $this->doctrine = $doctrine->getManager();
 
     }
 
@@ -29,7 +30,16 @@ class TodoRepository implements TodoRepositoryInterface
      */
     public function fetchAllTodos(): ?array
     {
-        return $this->doctrine->findAll()?? null;
+        return $this->doctrine->getRepository(Todo::class)->findAll()?? null;
+    }
+
+    /**
+     * @param int $categoryId
+     * @return null|Todo
+     */
+    public function getTodoByCategoryId(int $categoryId): ?Todo
+    {
+        return $this->doctrine->getRepository(Todo::class)->findOneBy(['category' => $categoryId])?? null;
     }
 
 
