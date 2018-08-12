@@ -19,10 +19,13 @@ class CategoryController extends FOSRestController
      */
     public function getCategoriesAction(): View
     {
+        $searchCategory = $this->get('action.search.categories');
+        $response = $searchCategory->fetchAllCategories();
+
         return $this->view(
             ReturnFormatter::successReturn(
-                ['data' => 'Category'],
-                'Todos returned correctly.',
+                $response,
+                'Categories returned correctly.',
                 Response::HTTP_OK
             ),
             Response::HTTP_OK
